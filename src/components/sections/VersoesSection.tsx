@@ -1,6 +1,6 @@
 'use client';
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const VERSOES = [
@@ -43,7 +43,7 @@ const VERSOES = [
 ];
 
 type Versao = (typeof VERSOES)[number];
-type MotionY = ReturnType<typeof useTransform>;
+type MotionY = MotionValue<number>;
 
 function VersionCard({ data, cardY, inView, delay }: {
   data: Versao;

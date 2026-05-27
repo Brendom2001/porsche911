@@ -17,7 +17,7 @@ const TIMELINE = [
   { year: '1989', desc: '964 AWD',        highlight: false },
   { year: '2011', desc: '991 PDK',        highlight: false },
   { year: '2019', desc: '992 PASM',       highlight: false },
-  { year: '2024', desc: 'Série atual',    highlight: true  },
+  { year: '2026', desc: 'Série atual',    highlight: true  },
 ];
 
 export default function SobreSection() {
@@ -87,6 +87,19 @@ export default function SobreSection() {
                 transition={{ duration: 1.4, delay: 0.3, ease: [0.76, 0, 0.24, 1] }}
                 style={{ position: 'absolute', left: 0, right: 0, top: 'calc(1em + 8px)', height: '1px', background: 'linear-gradient(to right, var(--gold), rgba(201,168,76,0.5))', transformOrigin: 'left', zIndex: 0 }}
               />
+
+              {/* Dot viajante — width 0%→100%, dot fica no flex-end */}
+              <div style={{ position: 'absolute', left: 0, right: 0, top: 'calc(1em + 4px)', height: '9px', zIndex: 3, overflow: 'visible', display: 'flex', alignItems: 'center' }}>
+                <motion.div
+                  initial={{ width: '0%' }}
+                  animate={{ width: timeline.inView ? '100%' : '0%' }}
+                  transition={{ duration: 1.4, delay: 0.3, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ height: '1px', overflow: 'visible', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}
+                >
+                  <div style={{ width: '9px', height: '9px', borderRadius: '50%', background: 'var(--gold)', flexShrink: 0, boxShadow: '0 0 14px rgba(201,168,76,0.9)' }} />
+                </motion.div>
+              </div>
+
               <div className="flex justify-between">
                 {TIMELINE.map(({ year, desc, highlight }, i) => {
                   const dotDelay = 0.3 + (i / (TIMELINE.length - 1)) * 1.4;

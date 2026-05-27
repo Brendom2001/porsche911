@@ -154,7 +154,7 @@ export default function VersoesSection() {
             </div>
           </motion.div>
 
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px, 5vw, 60px)', color: 'white', letterSpacing: '0.03em', overflow: 'hidden', textAlign: 'center' }}>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px, 5vw, 60px)', color: 'white', letterSpacing: '0.18em', overflow: 'hidden', textAlign: 'center', marginTop: '1rem' }}>
             {titleWords.map((word, i) => (
               <motion.span
                 key={i}

@@ -1,10 +1,12 @@
 'use client';
-import { useRef } from 'react';
-import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, MotionValue, AnimatePresence } from 'framer-motion';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const VERSOES = [
   {
+    slug: 'carrera',
+    imagem: '/images/911-carrera.png',
     nome: '911 Carrera',
     tag: 'O CLÁSSICO',
     desc: 'A expressão mais pura do 911. Performance equilibrada para o dia a dia.',
@@ -17,6 +19,8 @@ const VERSOES = [
     destaque: false,
   },
   {
+    slug: 'carrera-s',
+    imagem: '/images/911-carrera-s.png',
     nome: '911 Carrera S',
     tag: 'MAIS POPULAR',
     desc: 'O equilíbrio perfeito entre potência e requinte. A escolha dos entendidos.',
@@ -29,6 +33,8 @@ const VERSOES = [
     destaque: true,
   },
   {
+    slug: 'turbo-s',
+    imagem: '/images/911-turbo-s.png',
     nome: '911 Turbo S',
     tag: 'MÁXIMA PERFORMANCE',
     desc: 'O pináculo da engenharia Porsche. Para os que exigem o absoluto.',
@@ -45,33 +51,42 @@ const VERSOES = [
 type Versao = (typeof VERSOES)[number];
 type MotionY = MotionValue<number>;
 
-function VersionCard({ data, cardY, inView, delay }: {
+function VersionCard({ data, cardY, inView, delay, isSelected, onSelect }: {
   data: Versao;
   cardY: MotionY;
   inView: boolean;
   delay: number;
+  isSelected: boolean;
+  onSelect: () => void;
 }) {
   const { nome, tag, desc, specs, preco, destaque } = data;
 
   return (
     <motion.div style={{ y: cardY }}>
       <motion.div
+        onClick={onSelect}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
         transition={{ duration: 0.4, delay }}
         whileHover={{
-          y: -8,
-          boxShadow: '0 20px 60px rgba(201,168,76,0.1)',
-          borderColor: 'rgba(201,168,76,0.6)',
+          y: isSelected ? 0 : -8,
+          boxShadow: '0 20px 60px rgba(201,168,76,0.12)',
           transition: { type: 'spring', stiffness: 280, damping: 28 },
         }}
         style={{
-          background: destaque ? 'rgba(201,168,76,0.05)' : 'rgba(255,255,255,0.02)',
-          border: `1px solid rgba(201,168,76,${destaque ? '0.3' : '0.12'})`,
-          borderTop: `3px solid ${destaque ? 'var(--gold)' : 'rgba(201,168,76,0.3)'}`,
+          cursor: 'pointer',
+          background: isSelected
+            ? 'rgba(201,168,76,0.08)'
+            : destaque ? 'rgba(201,168,76,0.05)' : 'rgba(255,255,255,0.02)',
+          border: isSelected
+            ? '1px solid rgba(201,168,76,0.65)'
+            : `1px solid rgba(201,168,76,${destaque ? '0.3' : '0.12'})`,
+          borderTop: `3px solid ${isSelected || destaque ? 'var(--gold)' : 'rgba(201,168,76,0.3)'}`,
+          boxShadow: isSelected ? '0 0 40px rgba(201,168,76,0.12), inset 0 0 40px rgba(201,168,76,0.04)' : 'none',
           padding: '2rem',
           position: 'relative',
           height: '100%',
+          transition: 'background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease',
         }}
       >
         {destaque && (
@@ -79,6 +94,22 @@ function VersionCard({ data, cardY, inView, delay }: {
             MAIS POPULAR
           </div>
         )}
+
+        {/* Indicador de seleção */}
+        <AnimatePresence>
+          {isSelected && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.2 }}
+              style={{ position: 'absolute', bottom: '1rem', right: '1rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+            >
+              <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--gold)', boxShadow: '0 0 6px rgba(201,168,76,0.8)' }} />
+              <span style={{ fontFamily: 'var(--font-sans)', fontSize: '8px', letterSpacing: '0.2em', color: 'var(--gold)', fontWeight: 500 }}>SELECIONADO</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div style={{ fontFamily: 'var(--font-sans)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '1rem', fontWeight: 500 }}>
           {tag}
@@ -116,12 +147,13 @@ export default function VersoesSection() {
   const header     = useScrollReveal(0.1);
   const cards      = useScrollReveal(0.1);
 
+  const [selected, setSelected] = useState('carrera-s');
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
 
-  // Parallax pré-calculado (hooks não podem estar em .map)
   const card0Y = useTransform(scrollYProgress, [0, 1], [20, -20]);
   const card1Y = useTransform(scrollYProgress, [0, 1], [40, -40]);
   const card2Y = useTransform(scrollYProgress, [0, 1], [20, -20]);
@@ -129,13 +161,33 @@ export default function VersoesSection() {
 
   const titleWords = 'Escolha a Sua 911'.split(' ');
 
+  const selectedVersao = VERSOES.find(v => v.slug === selected);
+
   return (
     <section
       ref={sectionRef}
       id="versoes"
-      style={{ background: 'var(--surface)', borderTop: '1px solid rgba(201,168,76,0.1)' }}
+      style={{ position: 'relative', overflow: 'hidden', background: 'var(--surface)', borderTop: '1px solid rgba(201,168,76,0.1)' }}
     >
-      <div className="section-container" style={{ paddingTop: '10rem', paddingBottom: '10rem' }}>
+      {/* Background image da versão selecionada */}
+      <AnimatePresence>
+        <motion.div
+          key={selected}
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 0.28, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+          aria-hidden
+          style={{
+            position: 'absolute', inset: 0, zIndex: 0,
+            backgroundImage: selectedVersao ? `url('${selectedVersao.imagem}')` : 'none',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+      </AnimatePresence>
+
+      <div className="section-container" style={{ position: 'relative', zIndex: 1, paddingTop: '10rem', paddingBottom: '10rem' }}>
 
         {/* Header */}
         <div ref={header.ref}>
@@ -178,6 +230,8 @@ export default function VersoesSection() {
               cardY={cardYs[i]}
               inView={cards.inView}
               delay={0.1 + i * 0.12}
+              isSelected={selected === versao.slug}
+              onSelect={() => setSelected(versao.slug)}
             />
           ))}
         </div>

@@ -170,19 +170,22 @@ export default function VersoesSection() {
       style={{ position: 'relative', overflow: 'hidden', background: 'var(--surface)', borderTop: '1px solid rgba(201,168,76,0.1)' }}
     >
       {/* Background image da versão selecionada */}
-      <AnimatePresence>
+      <AnimatePresence mode="sync">
         <motion.div
           key={selected}
-          initial={{ opacity: 0, scale: 1.04 }}
-          animate={{ opacity: 0.28, scale: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.45 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.7 }}
           aria-hidden
           style={{
-            position: 'absolute', inset: 0, zIndex: 0,
-            backgroundImage: selectedVersao ? `url('${selectedVersao.imagem}')` : 'none',
+            position: 'absolute',
+            top: 0, left: 0, right: 0, bottom: 0,
+            zIndex: 0,
+            backgroundImage: `url('/images/911-${selected}.png')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
           }}
         />
       </AnimatePresence>

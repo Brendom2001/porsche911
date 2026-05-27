@@ -50,7 +50,7 @@ export default function AutoridadeSection() {
       id="autoridade"
       style={{ background: 'var(--black)' }}
     >
-      <div className="section-container" style={{ paddingTop: '10rem', paddingBottom: '10rem' }}>
+      <div className="section-container" style={{ paddingTop: 'clamp(4rem, 8vw, 10rem)', paddingBottom: 'clamp(4rem, 8vw, 10rem)' }}>
 
         {/* Label */}
         <motion.div
@@ -75,7 +75,7 @@ export default function AutoridadeSection() {
         />
 
         {/* Grid */}
-        <div className="grid-auto-2" style={{ gap: '5rem' }}>
+        <div className="grid-auto-2" style={{ gap: 'clamp(2rem, 5vw, 5rem)' }}>
 
           {/* Esquerda */}
           <div>
@@ -112,7 +112,7 @@ export default function AutoridadeSection() {
 
           {/* Direita */}
           <div className="flex flex-col justify-between">
-            <div ref={numeros.ref} className="flex flex-col gap-10">
+            <div ref={numeros.ref} className="flex flex-col" style={{ gap: '2rem' }}>
               {NUMEROS.map(({ display, value, decimals, suffix, label: lbl }, i) => (
                 <motion.div
                   key={lbl}

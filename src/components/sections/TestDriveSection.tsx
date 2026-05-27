@@ -22,7 +22,7 @@ export default function TestDriveSection() {
       id="contacto"
       style={{ background: 'var(--surface-mid)', borderTop: '1px solid rgba(201,168,76,0.1)' }}
     >
-      <div className="section-container grid-auto-2" style={{ paddingTop: '10rem', paddingBottom: '10rem', gap: '5rem' }}>
+      <div className="section-container grid-auto-2" style={{ paddingTop: 'clamp(4rem, 8vw, 10rem)', paddingBottom: 'clamp(4rem, 8vw, 10rem)', gap: 'clamp(2rem, 5vw, 5rem)' }}>
 
         {/* Coluna esquerda */}
         <div>

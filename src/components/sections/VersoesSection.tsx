@@ -190,7 +190,7 @@ export default function VersoesSection() {
         />
       </AnimatePresence>
 
-      <div className="section-container" style={{ position: 'relative', zIndex: 1, paddingTop: '10rem', paddingBottom: '10rem' }}>
+      <div className="section-container" style={{ position: 'relative', zIndex: 1, paddingTop: 'clamp(4rem, 8vw, 10rem)', paddingBottom: 'clamp(4rem, 8vw, 10rem)' }}>
 
         {/* Header */}
         <div ref={header.ref}>

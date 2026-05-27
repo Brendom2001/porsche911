@@ -78,6 +78,10 @@ body::after {
   .grid-auto-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
+/* Footer: right-aligned no desktop, centered no mobile */
+.md-text-right { text-align: center; }
+@media (min-width: 768px) { .md-text-right { text-align: right; } }
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 2px; }
 ::-webkit-scrollbar-track { background: transparent; }

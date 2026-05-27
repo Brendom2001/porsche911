@@ -34,7 +34,7 @@ export default function DiferenciaisSection() {
       id="experiencia"
       style={{ background: '#0D0D0D', borderTop: '1px solid rgba(201,168,76,0.08)' }}
     >
-      <div className="section-container" style={{ paddingTop: '10rem', paddingBottom: '10rem' }}>
+      <div className="section-container" style={{ paddingTop: 'clamp(4rem, 8vw, 10rem)', paddingBottom: 'clamp(4rem, 8vw, 10rem)' }}>
 
         {/* Header grid */}
         <div ref={header.ref} className="grid-auto-2" style={{ gap: '3rem', marginBottom: '1.5rem' }}>
@@ -76,7 +76,7 @@ export default function DiferenciaisSection() {
         <div ref={content.ref} className="flex flex-col">
           {DIFERENCIAIS.map(({ numero, titulo, desc }, i) => (
             <div key={numero}>
-              <div className="grid gap-8 py-14" style={{ gridTemplateColumns: '80px 1fr' }}>
+              <div className="grid" style={{ gridTemplateColumns: '80px 1fr', gap: '2rem', paddingTop: 'clamp(1.5rem, 3vw, 3.5rem)', paddingBottom: 'clamp(1.5rem, 3vw, 3.5rem)' }}>
 
                 {/* Número — entra da esquerda */}
                 <motion.div

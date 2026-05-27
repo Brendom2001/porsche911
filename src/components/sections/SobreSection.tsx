@@ -40,7 +40,7 @@ export default function SobreSection() {
         911
       </div>
 
-      <div className="section-container relative" style={{ paddingTop: '10rem', paddingBottom: '10rem' }}>
+      <div className="section-container relative" style={{ paddingTop: 'clamp(4rem, 8vw, 10rem)', paddingBottom: 'clamp(4rem, 8vw, 10rem)' }}>
 
         {/* Label */}
         <motion.div
@@ -57,7 +57,7 @@ export default function SobreSection() {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid-auto-2" style={{ gap: '5rem' }}>
+        <div className="grid-auto-2" style={{ gap: 'clamp(2rem, 5vw, 5rem)' }}>
 
           {/* Coluna esquerda */}
           <div ref={left.ref}>

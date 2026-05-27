@@ -7,7 +7,7 @@ export default function CTAFinal() {
 
   return (
     <section
-      style={{ background: 'linear-gradient(to bottom, #080808, #0D0D0D)', paddingTop: '12rem', paddingBottom: '12rem' }}
+      style={{ background: 'linear-gradient(to bottom, #080808, #0D0D0D)', paddingTop: 'clamp(5rem, 10vw, 12rem)', paddingBottom: 'clamp(5rem, 10vw, 12rem)' }}
     >
       <div className="section-container">
         <div ref={ref} className="flex flex-col items-center text-center">
@@ -51,7 +51,7 @@ export default function CTAFinal() {
             whileTap={{ scale: 0.98 }}
             style={{
               marginTop: '3.5rem',
-              padding: '1.25rem 4rem',
+              padding: '1.25rem clamp(1.5rem, 5vw, 4rem)',
               border: '1px solid var(--gold)',
               color: 'var(--gold)',
               fontFamily: 'var(--font-sans)',

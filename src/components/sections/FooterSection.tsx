@@ -18,7 +18,7 @@ export default function FooterSection() {
           © 2024 PORSCHE 911 · TODOS OS DIREITOS RESERVADOS
         </p>
 
-        <p style={{ fontFamily: 'var(--font-sans)', fontSize: '10px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.2)', textAlign: 'right' }}>
+        <p className="md-text-right" style={{ fontFamily: 'var(--font-sans)', fontSize: '10px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.2)' }}>
           PÁGINA CRIADA PARA FINS DEMONSTRATIVOS
         </p>
       </div>

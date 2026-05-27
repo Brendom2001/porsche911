@@ -61,7 +61,7 @@ export default function NavBar() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden flex flex-col justify-center w-6 h-6" style={{ gap: '5px' }}
+          className="md:hidden flex flex-col items-center justify-center" style={{ gap: '5px', width: '44px', height: '44px' }}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
         >

@@ -44,7 +44,7 @@ export default function DepoimentosSection() {
       ref={sectionRef}
       style={{ background: 'var(--black)' }}
     >
-      <div className="section-container" style={{ paddingTop: '10rem', paddingBottom: '10rem' }}>
+      <div className="section-container" style={{ paddingTop: 'clamp(4rem, 8vw, 10rem)', paddingBottom: 'clamp(4rem, 8vw, 10rem)' }}>
 
         {/* Header */}
         <div ref={header.ref} className="mb-16">

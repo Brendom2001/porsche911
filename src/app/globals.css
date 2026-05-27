@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@source "../**/*.{ts,tsx}";
+
+:root {
+  --black:        #080808;
+  --gold:         #C9A84C;
+  --gold-light:   #E8C96D;
+  --gold-dim:     #8A6E2F;
+  --cream:        #F0EDE6;
+  --cream-dim:    #B8B4AA;
+  --surface:      #111111;
+  --surface-mid:  #161616;
+  --surface-hi:   #1E1E1E;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--black);
+}
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--font-serif), "Georgia", serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Gold line divider */
+.gold-line {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* Photo fade nos edges */
+.edge-fade {
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to right,  transparent 0%, black 8%,  black 92%, transparent 100%);
+  mask-composite: intersect;
+}
+
+/* Centered section wrapper — guaranteed regardless of Tailwind scanning */
+.section-container {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+}
+@media (min-width: 640px)  { .section-container { padding-left: 3rem;    padding-right: 3rem;    } }
+@media (min-width: 768px)  { .section-container { padding-left: 4.5rem;  padding-right: 4.5rem;  } }
+@media (min-width: 1024px) { .section-container { padding-left: 6.5rem;  padding-right: 6.5rem;  } }
+@media (min-width: 1280px) { .section-container { padding-left: 8.5rem;  padding-right: 8.5rem;  } }
+
+/* Responsive grid helpers — bypasses Tailwind scanning unreliability */
+.grid-auto-2,
+.grid-auto-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .grid-auto-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-auto-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 1px; }
+
+/* Scroll bounce hint */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0);  opacity: 0.4; }
+  50%       { transform: translateY(7px); opacity: 1; }
+}
+.scroll-bounce { animation: scrollBounce 1.8s ease-in-out infinite; }
+
+/* Text reveal animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* Gold shimmer on hover */
+@keyframes goldShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.gold-shimmer {
+  background: linear-gradient(90deg, var(--gold-dim) 0%, var(--gold-light) 50%, var(--gold-dim) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gold-shimmer:hover {
+  animation: goldShimmer 1.4s linear infinite;
+}

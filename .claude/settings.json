@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"c:/Users/Pichau/Desktop/PORSCHE911/src/app\" \"c:/Users/Pichau/Desktop/PORSCHE911/src/hooks\" \"c:/Users/Pichau/Desktop/PORSCHE911/src/components/ui\" \"c:/Users/Pichau/Desktop/PORSCHE911/src/components/sections\" \"c:/Users/Pichau/Desktop/PORSCHE911/public/frames/loop\")",
+      "Bash(npm install *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3099)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3099/)",
+      "Bash(curl -s http://localhost:3099/)",
+      "Bash(node -e \"require\\('puppeteer'\\)\")",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Bash(node -e ' *)",
+      "Bash(cd /tmp && npm install puppeteer-core 2>&1 | tail -3)",
+      "Read(//c/tmp/**)",
+      "Bash(ls C:/Users/Pichau/AppData/Roaming/npm/node_modules/ 2>/dev/null | head -20 *)",
+      "Read(//c/Users/Pichau/AppData/Roaming/npm/node_modules/**)",
+      "Bash(python extract_frames.py)",
+      "Bash(py --version)",
+      "Bash(where python3 *)",
+      "Bash(where py *)",
+      "Bash(python3 extract_frames.py)",
+      "Bash(where ffmpeg *)",
+      "Bash(where ffprobe *)",
+      "Bash(npm list *)",
+      "Bash(netstat -ano)",
+      "Bash(findstr \":3000\")",
+      "Bash(npm run *)",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\(JSON.stringify\\(p.dependencies, null, 2\\)\\)\")",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\(p.dependencies['framer-motion']\\)\")",
+      "Bash(Start-Sleep -Seconds 6)",
+      "Bash(Get-Content \"C:\\\\Users\\\\Pichau\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Pichau-Desktop-PORSCHE911\\\\9fdb3658-d7e1-4393-8d1a-6410a1f92e93\\\\tasks\\\\bqoxpx07h.output\")",
+      "Bash(Select-Object -Last 20)",
+      "Bash(gh repo *)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(python3 \"C:/Users/Pichau/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"luxury landing page centering layout\" --domain landing -n 5)",
+      "Bash(python \"C:/Users/Pichau/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"luxury landing page centering layout\" --domain landing -n 5)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(Get-ChildItem \"c:\\\\Users\\\\Pichau\\\\Desktop\\\\PORSCHE911\\\\.next\\\\static\\\\css\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\Pichau\\Desktop\\PORSCHE911\\src"
+    ]
+  }
+}

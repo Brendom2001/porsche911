@@ -1,5 +1,6 @@
 import NavBar              from '@/components/ui/NavBar';
 import FrameSequence       from '@/components/ui/FrameSequence';
+import HeroBlackOverlay    from '@/components/ui/HeroBlackOverlay';
 import HeroOverlays        from '@/components/sections/HeroOverlays';
 import AutoridadeSection   from '@/components/sections/AutoridadeSection';
 import VersoesSection      from '@/components/sections/VersoesSection';
@@ -29,6 +30,7 @@ export default function Home() {
         height={HEIGHT}
         id="hero"
       >
+        <HeroBlackOverlay />
         <HeroOverlays />
         {/* Transição suave para o preto */}
         <div

@@ -77,28 +77,49 @@ export default function SobreSection() {
             </motion.div>
 
             {/* Timeline */}
-            <motion.div
-              ref={timeline.ref}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: timeline.inView ? 1 : 0, y: timeline.inView ? 0 : 20 }}
-              transition={{ duration: 0.42, delay: 0.3 }}
-              className="mt-12 relative"
-            >
-              <div style={{ position: 'absolute', left: 0, right: 0, top: 'calc(1em + 8px)', height: '1px', background: 'rgba(201,168,76,0.2)' }} />
+            <div ref={timeline.ref} className="mt-12 relative">
+              {/* Linha fantasma */}
+              <div style={{ position: 'absolute', left: 0, right: 0, top: 'calc(1em + 8px)', height: '1px', background: 'rgba(201,168,76,0.1)' }} />
+              {/* Linha dourada animada */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: timeline.inView ? 1 : 0 }}
+                transition={{ duration: 1.4, delay: 0.3, ease: [0.76, 0, 0.24, 1] }}
+                style={{ position: 'absolute', left: 0, right: 0, top: 'calc(1em + 8px)', height: '1px', background: 'linear-gradient(to right, var(--gold), rgba(201,168,76,0.5))', transformOrigin: 'left', zIndex: 0 }}
+              />
               <div className="flex justify-between">
-                {TIMELINE.map(({ year, desc, highlight }) => (
-                  <div key={year} className="flex flex-col items-center" style={{ gap: '8px' }}>
-                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', lineHeight: 1, color: highlight ? 'var(--gold)' : 'rgba(201,168,76,0.5)', fontWeight: 500 }}>
-                      {year}
-                    </span>
-                    <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--gold)', position: 'relative', zIndex: 1 }} />
-                    <span className="hidden sm:block text-center" style={{ fontFamily: 'var(--font-sans)', fontSize: '9px', color: 'rgba(255,255,255,0.3)', lineHeight: 1.4 }}>
-                      {desc}
-                    </span>
-                  </div>
-                ))}
+                {TIMELINE.map(({ year, desc, highlight }, i) => {
+                  const dotDelay = 0.3 + (i / (TIMELINE.length - 1)) * 1.4;
+                  return (
+                    <div key={year} className="flex flex-col items-center" style={{ gap: '8px' }}>
+                      <motion.span
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: timeline.inView ? 1 : 0, y: timeline.inView ? 0 : -8 }}
+                        transition={{ duration: 0.35, delay: dotDelay }}
+                        style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', lineHeight: 1, color: highlight ? 'var(--gold)' : 'rgba(201,168,76,0.5)', fontWeight: 500 }}
+                      >
+                        {year}
+                      </motion.span>
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: timeline.inView ? 1 : 0 }}
+                        transition={{ duration: 0.25, delay: dotDelay, ease: 'easeOut' }}
+                        style={{ width: highlight ? '6px' : '4px', height: highlight ? '6px' : '4px', borderRadius: '50%', background: highlight ? 'var(--gold)' : 'rgba(201,168,76,0.6)', position: 'relative', zIndex: 1, boxShadow: highlight ? '0 0 8px rgba(201,168,76,0.5)' : 'none' }}
+                      />
+                      <motion.span
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: timeline.inView ? 1 : 0, y: timeline.inView ? 0 : 8 }}
+                        transition={{ duration: 0.35, delay: dotDelay + 0.1 }}
+                        className="hidden sm:block text-center"
+                        style={{ fontFamily: 'var(--font-sans)', fontSize: '9px', color: 'rgba(255,255,255,0.3)', lineHeight: 1.4 }}
+                      >
+                        {desc}
+                      </motion.span>
+                    </div>
+                  );
+                })}
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Coluna direita */}

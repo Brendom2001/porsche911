@@ -76,32 +76,39 @@ export default function DiferenciaisSection() {
         <div ref={content.ref} className="flex flex-col">
           {DIFERENCIAIS.map(({ numero, titulo, desc }, i) => (
             <div key={numero}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: content.inView ? 1 : 0, y: content.inView ? 0 : 20 }}
-                transition={{ duration: 0.4, delay: 0.15 + i * 0.1 }}
-                className="grid gap-8 py-10"
-                style={{ gridTemplateColumns: '80px 1fr' }}
-              >
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(44px, 5vw, 64px)', color: 'rgba(201,168,76,0.2)', lineHeight: 1, letterSpacing: '0.03em' }}>
+              <div className="grid gap-8 py-14" style={{ gridTemplateColumns: '80px 1fr' }}>
+
+                {/* Número — entra da esquerda */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: content.inView ? 1 : 0, x: content.inView ? 0 : -30 }}
+                  transition={{ duration: 0.55, delay: 0.1 + i * 0.12, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(44px, 5vw, 64px)', color: 'rgba(201,168,76,0.2)', lineHeight: 1, letterSpacing: '0.03em' }}
+                >
                   {numero}
-                </div>
-                <div>
+                </motion.div>
+
+                {/* Conteúdo — entra da direita */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: content.inView ? 1 : 0, x: content.inView ? 0 : 30 }}
+                  transition={{ duration: 0.55, delay: 0.18 + i * 0.12, ease: [0.76, 0, 0.24, 1] }}
+                >
                   <div style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'white', marginBottom: '0.75rem', fontWeight: 500 }}>
                     {titulo}
                   </div>
                   <p style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(16px, 1.7vw, 20px)', color: 'rgba(255,255,255,0.5)', lineHeight: 1.75 }}>
                     {desc}
                   </p>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
 
               {/* Linha dourada sequencial */}
               {i < DIFERENCIAIS.length - 1 && (
                 <motion.div
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: content.inView ? 1 : 0 }}
-                  transition={{ duration: 0.65, delay: 0.15 * i, ease: 'easeInOut' }}
+                  transition={{ duration: 0.7, delay: 0.28 + i * 0.12, ease: [0.76, 0, 0.24, 1] }}
                   className="origin-left w-full h-px"
                   style={{ background: 'rgba(201,168,76,0.2)' }}
                 />
